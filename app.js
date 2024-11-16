@@ -59,7 +59,6 @@ const sessionConfig={
     saveUninitialized:true,
     cookie:{
         httpOnly:true,
-        secure: process.env.NODE_ENV === 'production',
         expires:Date.now() + 1000*60*60*24*7,
         maxAge: 1000*60*60*24*7
     }
@@ -105,7 +104,7 @@ app.use(
 
 
 app.use(passport.initialize());
-app.use(passport.session()); //session should be used before it
+app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
