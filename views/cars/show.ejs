@@ -28,6 +28,7 @@
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item lead"><%= car.company %></li>
+              <li class="list-group-item text-muted">Submitted by: <%= car.author.username %></li>
               <li class="list-group-item">$<%= car.price%></li>
             </ul>
             <% if(currentUser && car.author.equals(currentUser._id)) {%> 
