@@ -1,7 +1,7 @@
 # Car Management Application
 
 ## Description
-A **Car Management Application** that allows users to create, view, update, and delete car entries. Each car can have up to 10 images, a title, a description, and tags (e.g., car type, company, dealer). The app provides user authentication to ensure that users can only manage their own cars and includes search functionality to filter cars by title, description, or tags.
+A **Car Management Application** that allows users to create, view, update, and delete car entries. Each car can have up to 10 images, a title, price, a description, and tags (e.g., created by, company, etc.). The app provides user authentication to ensure that users can only manage their own cars and includes search functionality to filter cars by title, description, or tags.
 
 ## Features
 1. **User Authentication**:
@@ -84,7 +84,7 @@ A **Car Management Application** that allows users to create, view, update, and 
 
 4. **Run the application**:
    ```bash
-   npm start
+   node app.js
    ```
 
 5. **Access the application**:
