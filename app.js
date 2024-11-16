@@ -21,24 +21,18 @@ const userRoutes=require('./routes/users');
 const carRoutes=require('./routes/cars');
 const reviewRoutes=require('./routes/reviews');
 
-const MongoStore=require('connect-mongo')(session);
-mongoose.set('strictQuery', true);
-//const dbUrl='mongodb://localhost:27017/my-camp'
+const MongoStore=require('connect-mongo');
+const app=express();
+
 const dbUrl = process.env.DB_URL;
 const mysecret = process.env.SECRET;
-mongoose.connect(dbUrl,{
-    useNewUrlParser:true,
-    useUnifiedTopology:true,
-    //useCreateIndex:true,
-    //useFindAndModify:false
-})
-const db=mongoose.connection;
-db.on('error',console.error.bind(console,'connection errror:'));
-db.once('open',()=>{
+
+mongoose.connect(dbUrl).then(()=>{
     console.log('Database connected');
+}).catch(err=>{
+    console.error('Error connecting to database:', err);
 })
 
-const app=express();
 app.engine('ejs',ejsMate);
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
@@ -46,13 +40,13 @@ app.set('views',path.join(__dirname,'views'));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname,'public')));
-app.use(mongoSanitize(
-    //replaceWith:'_'
-));
+app.use(mongoSanitize()); // Sanitize MongoDB queries to prevent injection
+
 const store=new MongoStore({
-    url:dbUrl,
+    mongoUrl:dbUrl,
     secret:mysecret,
     touchAfter: 24*60*60,
+    collectionName: 'sessions'
 })
 store.on('error',function(e){
     console.log('session store error',e)
@@ -65,7 +59,7 @@ const sessionConfig={
     saveUninitialized:true,
     cookie:{
         httpOnly:true,
-        //secure:true,
+        secure: process.env.NODE_ENV === 'production',
         expires:Date.now() + 1000*60*60*24*7,
         maxAge: 1000*60*60*24*7
     }
