@@ -1,0 +1,33 @@
+<% layout('layouts/boilerplate') %>
+<div id="cluster-map"></div>
+    <h1>All cars</h1>
+    <!-- <ul> -->
+    <% for(let car of cars) { %>
+        <div class="card mb-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <%if(car.images.length) {%>
+                    <img src="<%=car.images[0].url%>" alt="" class="img-fluid">
+                    <% }else {%>
+                        <img class="img-fluid" alt=""
+                        src="https://res.cloudinary.com/dcuz2moth/image/upload/v1731750428/CarsMgr/md1a4zihohf9hl7qwihy.avif">
+                    <% } %>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><%=car.title%>, <span class="lead"><%=car.company%><span></span></h5>
+                        <p class="card_text"><%=car.description%></p>
+                        
+                        <a class="btn btn-outline-dark btn-sm" href="cars/<%=car._id%>">View <%=car.title%></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <li><a href="/cars/<%= car._id%>"><%= car.title %></a></li> -->
+    <% } %> 
+    <!-- </ul> -->
+
+    <script>
+        const cars={features: <%-JSON.stringify(cars)%>};
+</script>
