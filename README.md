@@ -45,13 +45,19 @@ A **Car Management Application** that allows users to create, view, update, and 
 - **Passport.js**: For user authentication and session management.
 - **Joi**: Schema description language for validating API inputs.
 
+### Database:
+- **MongoDB**: A NoSQL database to store user and car data. It provides high performance, flexibility, and scalability. 
+
+### Cloud Services:
+- **Cloudinary**: Used to manage image uploads for car products. Cloudinary provides a powerful API for storing, transforming, and delivering images efficiently.
+
 ---
 
 ## Installation and Setup
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/car-management-app.git
+   git clone https://github.com/this-izz-nandini/c-ours.git
    cd car-management-app
    ```
 
@@ -67,7 +73,14 @@ A **Car Management Application** that allows users to create, view, update, and 
      PORT=5000
      DB_URI=mongodb://localhost:27017/car-management
      SESSION_SECRET=your_secret_key
+     CLOUDINARY_NAME=your_cloudinary_name
+     CLOUDINARY_API_KEY=your_cloudinary_api_key
+     CLOUDINARY_API_SECRET=your_cloudinary_api_secret
      ```
+
+   > **Note**: To use Cloudinary:
+   > - Sign up for a free account at [Cloudinary](https://cloudinary.com/).
+   > - Retrieve your `CLOUDINARY_NAME`, `CLOUDINARY_API_KEY`, and `CLOUDINARY_API_SECRET` from the **Cloudinary Dashboard**.
 
 4. **Run the application**:
    ```bash
